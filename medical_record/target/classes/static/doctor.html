@@ -362,6 +362,7 @@
         data: {
             doctorName: "",
             recordList: [],
+            recordListCopy: [],
             searchName: ""
         },
         methods: {
@@ -387,9 +388,9 @@
             },
             search() {
                 var newRecordList = [];
-                for (let i = 0; i < this.recordList.length; i++) {
-                    if (this.recordList[i].userName.includes(this.searchName)) {
-                        newRecordList[i] = this.recordList[i];
+                for (let i = 0; i < this.recordListCopy.length; i++) {
+                    if (this.recordListCopy[i].userName.includes(this.searchName)) {
+                        newRecordList[i] = this.recordListCopy[i];
                     }
                 }
                 this.recordList = newRecordList;
@@ -407,6 +408,7 @@
                     var recordVoList = respData.data;
                     _this.doctorName = recordVoList[0].doctorName;
                     _this.recordList = recordVoList;
+                    _this.recordListCopy = recordVoList;
                 }
             });
         }
