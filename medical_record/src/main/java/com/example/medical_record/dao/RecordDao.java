@@ -4,4 +4,6 @@ import com.example.medical_record.entity.po.Record;
 
 public interface RecordDao {
     void addRecord(Record record);
+
+    void deleteById(Integer id);
 }

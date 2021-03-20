@@ -10,5 +10,7 @@
         values (#{uid}, #{did}, #{description}, #{state}, #{date})
     </insert>
 
-
+    <delete id="deleteById" parameterType="int">
+        delete from t_record where id=#{id}
+    </delete>
 </mapper>

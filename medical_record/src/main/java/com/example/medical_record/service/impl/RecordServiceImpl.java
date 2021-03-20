@@ -37,5 +37,10 @@ public class RecordServiceImpl implements RecordService {
         record.setDate(new Date(System.currentTimeMillis()));
         recordDao.addRecord(record);
     }
+
+    @Override
+    public void deleteRecord(Integer id) {
+        recordDao.deleteById(id);
+    }
 }
 

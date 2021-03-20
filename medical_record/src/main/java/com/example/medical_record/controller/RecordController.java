@@ -31,4 +31,19 @@ public class RecordController {
 
     }
 
+    @GetMapping("/delete")
+    public ResponseData deleteRecord(@RequestParam("id") Integer id) {
+        log.debug("recordId：" + id);
+        ResponseData responseData = new ResponseData();
+        try {
+            recordService.deleteRecord(id);
+            responseData.setSuccess(true);
+            return responseData;
+        } catch (Exception e) {
+            responseData.setSuccess(false).setMsg(e.getMessage());
+            return responseData;
+        }
+
+    }
+
 }

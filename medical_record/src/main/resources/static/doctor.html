@@ -284,10 +284,10 @@
                                             <td v-text="record.date"></td>
                                             <td>
                                                 <div class="hidden-sm hidden-xs btn-group">
-                                                    <button class="btn btn-xs btn-info">
+                                                    <button class="btn btn-xs btn-info" @click="update">
                                                         <i class="ace-icon fa fa-pencil bigger-120"></i>
                                                     </button>
-                                                    <button class="btn btn-xs btn-danger">
+                                                    <button class="btn btn-xs btn-danger" @click="del(record.id)">
                                                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                                     </button>
                                                 </div>
@@ -367,9 +367,9 @@
                 localStorage.clear();
                 location.href = "login.html";
             },
-            delete() {
+            del(id) {
                 if (confirm("确认删除当前记录吗？")) {
-                    axios.get("http://localhost/record/delete?id="+this.doctor.id).then(function (response) {
+                    axios.get("http://localhost/record/delete?id="+id).then(function (response) {
                         var responseData = response.data;
                         if (responseData.success) {
                             location.href = "doctor.html";
