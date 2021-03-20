@@ -6,4 +6,6 @@ public interface RecordService {
     void addRecord(RecordVo recordVo, Integer did);
 
     void deleteRecord(Integer id);
+
+    void updateRecord(RecordVo recordVo);
 }

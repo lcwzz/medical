@@ -284,7 +284,7 @@
                                             <td v-text="record.date"></td>
                                             <td>
                                                 <div class="hidden-sm hidden-xs btn-group">
-                                                    <button class="btn btn-xs btn-info" @click="update">
+                                                    <button class="btn btn-xs btn-info" @click="update(record)">
                                                         <i class="ace-icon fa fa-pencil bigger-120"></i>
                                                     </button>
                                                     <button class="btn btn-xs btn-danger" @click="del(record.id)">
@@ -368,7 +368,6 @@
                 location.href = "login.html";
             },
             del(id) {
-                console.log(id);
                 if (confirm("确认删除当前记录吗？")) {
                     axios.get("http://localhost/record/delete?id="+id).then(function (response) {
                         var responseData = response.data;
@@ -380,8 +379,9 @@
                     });
                 }
             },
-            update() {
-
+            update(record) {
+                localStorage.setItem("record", JSON.stringify(record));
+                location.href = "updateRecord.html";
             }
         },
         created() {

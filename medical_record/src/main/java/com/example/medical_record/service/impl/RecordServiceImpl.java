@@ -42,5 +42,10 @@ public class RecordServiceImpl implements RecordService {
     public void deleteRecord(Integer id) {
         recordDao.deleteById(id);
     }
+
+    @Override
+    public void updateRecord(RecordVo recordVo) {
+        recordDao.updateRecord(recordVo);
+    }
 }
 

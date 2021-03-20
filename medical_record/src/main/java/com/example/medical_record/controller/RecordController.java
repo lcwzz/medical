@@ -46,4 +46,19 @@ public class RecordController {
 
     }
 
+    @PostMapping("/update")
+    public ResponseData updateRecord(@RequestBody RecordVo recordVo) {
+        log.debug(recordVo.toString());
+        ResponseData responseData = new ResponseData();
+        try {
+            recordService.updateRecord(recordVo);
+            responseData.setSuccess(true);
+            return responseData;
+        } catch (Exception e) {
+            responseData.setSuccess(false).setMsg(e.getMessage());
+            return responseData;
+        }
+
+    }
+
 }

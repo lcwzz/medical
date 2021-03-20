@@ -13,4 +13,9 @@
     <delete id="deleteById" parameterType="int">
         delete from t_record where id=#{id}
     </delete>
+
+    <update id="updateRecord" parameterType="RecordVo">
+        update t_record set description=#{description}, state=#{state}
+        where id=#{id}
+    </update>
 </mapper>

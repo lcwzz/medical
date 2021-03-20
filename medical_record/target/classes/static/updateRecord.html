@@ -207,7 +207,7 @@
                         <a href="javascript:void(0)">病历管理</a>
                     </li>
                     <li>
-                        <a href="addRecord.html">病历添加</a>
+                        <a href="javascript:void(0)">病历修改</a>
                     </li>
                 </ul><!-- /.breadcrumb -->
 
@@ -229,8 +229,8 @@
                                         姓名：</label>
 
                                     <div class="col-sm-9">
-                                        <input type="text" id="form-field-1" placeholder="输入姓名"
-                                             v-model="record.userName"  class="col-xs-10 col-sm-5"/>
+                                        <input type="text" id="form-field-1" readonly="true"
+                                               v-model="record.userName"  class="col-xs-10 col-sm-5"/>
                                     </div>
                                 </div>
                                 <!-- /section:elements.form -->
@@ -291,7 +291,7 @@
 
                                 <div class="clearfix form-actions">
                                     <div class="col-md-offset-3 col-md-9">
-                                        <button class="btn btn-info" type="button" @click="add">
+                                        <button class="btn btn-info" type="button" @click="update">
                                             <i class="ace-icon fa fa-check bigger-110"></i>
                                             立即提交
                                         </button>
@@ -803,11 +803,7 @@
         el: "#app",
         data: {
             doctor: {},
-            record: {
-                userName: "",
-                description: "",
-                state: ""
-            }
+            record: {}
         },
         methods: {
             logout() {
@@ -815,15 +811,10 @@
                 location.href = "login.html";
             },
             reset() {
-                this.record.userName = "";
                 this.record.description = "";
                 this.record.state = "";
             },
-            add() {
-                if (this.record.userName == "") {
-                    alert("患者姓名不能为空");
-                    return;
-                }
+            update() {
                 if (this.record.description == "") {
                     alert("医嘱不能为空");
                     return;
@@ -832,7 +823,7 @@
                     alert("状态不能为空");
                     return;
                 }
-                axios.post("http://localhost/record/add?did="+this.doctor.id, this.record).then(function (response) {
+                axios.post("http://localhost/record/update", this.record).then(function (response) {
                     var responseData = response.data;
                     if (responseData.success) {
                         location.href = "doctor.html";
@@ -850,6 +841,8 @@
                 var data = response.data.data;
                 _this.doctor = data;
             });
+            this.record = JSON.parse(localStorage.getItem("record"));
+            localStorage.removeItem("record");
         }
     });
 </script>
