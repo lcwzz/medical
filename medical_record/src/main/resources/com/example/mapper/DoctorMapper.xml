@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.medical_record.dao.DoctorDao">
+
+    <select id="findDoctorByAccount" parameterType="String" resultType="Doctor">
+        select * from t_doctor where account=#{account}
+    </select>
+
+    <select id="findRecordVoByDid" parameterType="int" resultType="RecordVo">
+        select r.id id, u.name userName, d.name doctorName, room.name roomName, description, state, date
+        from t_record r
+                 left JOIN t_user u on (r.uid = u.id)
+                 left join t_doctor d on (r.did = d.id)
+                 left JOIN t_room room on (d.rid = room.id)
+        where r.did=#{did}
+    </select>
+
+    <select id="findDoctorById" parameterType="int" resultType="DoctorVo">
+        select t_doctor.id id, account, password, t_doctor.name name, sex, age, t_room.name roomName
+        from t_doctor left join t_room on (t_doctor.rid=t_room.id) where t_doctor.id=#{id}
+    </select>
+
+    <update id="updateDoctor" parameterType="Doctor">
+        update t_doctor set password=#{password}, name=#{name}, age=#{age}
+        where id=#{id}
+    </update>
+</mapper>

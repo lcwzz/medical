@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>注册</title>
+<link type="text/css" rel="stylesheet" href="css/zhuce.css" />
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+	var height=$(document).height();
+	$('.main').css('height',height);
+})
+</script>
+</head>
+
+<body>
+<div class="main" id="app">
+  <div class="main0">
+     <div class="main_left">
+        <img src="images/zhuce-image-3.png" class="theimg"/>
+        <img src="images/zhuce-image-2.png" class="secimg"/>
+        <img src="images/zhuce-image-1.png" class="firimg"/>
+     </div>
+     <div class="main_right">
+        <div class="main_r_up">
+            <img src="images/user.png" />
+            <div class="pp">注册</div>
+        </div>
+        <div class="sub"><p>已经注册？<a href="login.html"><span class="blue">请登录</span></a></p></div>
+         <div class="txt txt0">
+             <span style="letter-spacing:16px;">账号:</span>
+             <input name="" type="text" class="txtphone" v-model="user.account" placeholder="请输入账号"/>
+         </div>
+         <div class="txt txt0">
+             <span style="letter-spacing:4px;">登录密码:</span>
+             <input name="" type="password" class="txtphone" v-model="user.password" placeholder="请输入密码"/>
+         </div>
+         <div class="txt txt0">
+             <span style="letter-spacing:4px;">真实姓名:</span>
+             <input name="" type="text" class="txtphone" v-model="user.name" placeholder="请输入真实姓名"/>
+         </div>
+         <div class="txt txt0">
+             <span style="letter-spacing:16px;">年龄:</span>
+             <input name="" type="text" class="txtphone" v-model="user.age" placeholder="请输入年龄"/>
+         </div>
+
+         <div class="txt txt0">
+             <span style="letter-spacing:16px;">性别:</span>
+             <label><input class="xx" type="radio" v-model="user.sex" name="sex" value="0"> &nbsp男</label>
+             <span style="letter-spacing:4px;">&nbsp &nbsp</span>
+             <label><input class="xx" type="radio" v-model="user.sex" name="sex" value="1"> &nbsp女</label>
+         </div>
+        <a href="zhuceSucc.html" @click.prevent="register"><div class="xiayibu">确认注册</div></a>
+     </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer0">
+     <div class="footer_l">使用条款 | 隐私保护</div>
+     <div class="footer_r">© 2021</div>
+  </div> 
+</div>
+</body>
+</html>
+
+<script src="js/vue.js"></script>
+<script src="js/axios.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            user: {
+                account: "",
+                password: "",
+                name: "",
+                age: "",
+                sex: 0
+            } // 绑定用户注册信息
+        },
+        methods: {
+            register() {
+                _this = this;
+                if (this.user.account == "") {
+                    alert("账号不能为空！");
+                    return;
+                }
+                if (this.user.password == "") {
+                    alert("密码不能为空！");
+                    return;
+                }
+                if (this.user.name == "") {
+                    alert("真实姓名不能为空！");
+                    return;
+                }
+                if (this.user.age == "") {
+                    alert("年龄不能为空！");
+                    return;
+                }
+                axios.post("http://localhost/user/register", this.user).then(function (response) {
+                    if (response.data.success) {
+                        location.href = "zhuceSucc.html";
+                    } else {
+                        alert(response.data.msg);
+                        _this.user.account = "";
+                    }
+                });
+            }
+        }
+    });
+</script>

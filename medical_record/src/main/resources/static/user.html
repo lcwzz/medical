@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <title>海天电子病历管理系统（EMR）</title>
+    <meta name="description" content="Restyling jQuery UI Widgets and Elements"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-fonts.css"/>
+    <link rel="stylesheet" href="assets/css/ace.min.css" id="main-ace-style"/>
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="assets/css/ace-part2.min.css"/>
+    <![endif]-->
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
+    <![endif]-->
+    <script src="assets/js/ace-extra.min.js"></script>
+    <!--[if lte IE 8]>
+    <script src="assets/js/html5shiv.min.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        .CSSearchTbl {
+            border: 1px #008CD4 solid;
+        }
+
+        .CSSearchTbl thead {
+        }
+
+        .CSSearchTbl thead tr {
+        }
+
+        .CSSearchTbl thead tr th {
+            text-align: left;
+            padding-left: 10px;
+        }
+
+        .CSSearchTbl tbody {
+        }
+
+        .CSSearchTbl tbody tr {
+        }
+
+        .CSSearchTbl tbody tr td {
+            padding: 10px;
+        }
+
+        .CSSearchTbl tbody tr td.right {
+            text-align: left;
+        }
+
+        .CSSearchTbl tbody tr td.left {
+            text-align: right;
+        }
+
+        .table-responsive {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="no-skin">
+<div id="app">
+    <!-- #section:basics/navbar.layout -->
+    <div id="navbar" class="navbar navbar-default">
+
+        <div class="navbar-container" id="navbar-container">
+            <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="navbar-header pull-left">
+                <!-- #section:basics/navbar.layout.brand -->
+                <a href="#" class="navbar-brand">
+                    海天病历管理系统
+                </a>
+            </div>
+
+            <!-- #section:basics/navbar.dropdown -->
+            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+
+
+                    <!-- #section:basics/navbar.user_menu -->
+                    <li class="light-blue">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            <img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo"/>
+                            <d class="user-info">
+                                欢迎您<br/>
+                                <div v-text="userName"></div>
+                            </d>
+                            </span>
+
+                            <i class="ace-icon fa fa-caret-down"></i>
+                        </a>
+
+                        <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+
+
+                            <li>
+                                <a href="userInfo.html">
+                                    <i class="ace-icon fa fa-user"></i>
+                                    个人信息设置
+                                </a>
+                            </li>
+
+                            <li class="divider"></li>
+
+                            <li>
+                                <a href="#" @click="logout">
+                                    <i class="ace-icon fa fa-power-off"></i>
+                                    登出
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- /section:basics/navbar.user_menu -->
+                </ul>
+            </div>
+
+            <!-- /section:basics/navbar.dropdown -->
+        </div><!-- /.navbar-container -->
+    </div>
+
+    <!-- /section:basics/navbar.layout -->
+    <div class="main-container" id="main-container">
+
+        <!-- #section:basics/sidebar -->
+        <div id="sidebar" class="sidebar responsive">
+
+            <ul class="nav nav-list">
+                <li class="active">
+                    <a href="#">
+                        <i class="menu-icon fa fa-tachometer"></i>
+                        <span class="menu-text"> 电子管理系统 </span>
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+
+                <li class="active open">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-list"></i>
+                        <span class="menu-text"> 病历管理 </span>
+
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+
+                    <b class="arrow"></b>
+
+                    <ul class="submenu">
+
+                        <li class="active">
+                            <a href="user.html">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                病历查看
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-tag"></i>
+                        <span class="menu-text"> 更多页面 </span>
+
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+
+                    <b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="">
+                            <a href="userInfo.html">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                用户信息
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+
+                        <li class="">
+                            <a href="userUpdate.html">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                修改个人信息
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+
+                        <li class="">
+                            <a href="#" @click="logout">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                注销
+                            </a>
+
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+
+
+            </ul><!-- /.nav-list -->
+
+
+            <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left"
+                   data-icon2="ace-icon fa fa-angle-double-right"></i>
+            </div>
+
+        </div>
+
+
+        <!-- /section:basics/sidebar -->
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="javascript:void(0)">病历管理系统</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">病历管理</a>
+                    </li>
+                    <li>
+                        <a href="user.html">病历查看</a>
+                    </li>
+                </ul><!-- /.breadcrumb -->
+
+                <!-- #section:basics/content.searchbox -->
+                <div class="nav-search" id="nav-search">
+                    <form class="form-search">
+							<span class="input-icon">
+								<input type="text" placeholder="请输入关键字 ..." class="nav-search-input"
+                                       id="nav-search-input" autocomplete="off"/>
+								<i class="ace-icon fa fa-search nav-search-icon"></i>
+							</span>
+                    </form>
+                </div><!-- /.nav-search -->
+            </div>
+            <div class="page-content">
+                <!-- /section:settings.box -->
+                <div class="page-content-area">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <!-- PAGE CONTENT BEGINS -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>科室</th>
+                                            <th>诊断医生</th>
+                                            <th>医嘱</th>
+                                            <th>状态</th>
+                                            <th>日期</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <tr v-for="(record, index) in recordList">
+                                            <td v-text="index + 1"></td>
+                                            <td v-text="record.roomName"></td>
+                                            <td v-text="record.doctorName"></td>
+                                            <td v-text="record.description"></td>
+                                            <td v-text="record.state"></td>
+                                            <td v-text="record.date"></td>
+                                            <td>
+                                                <div class="hidden-sm hidden-xs btn-group">
+                                                    <button class="btn btn-xs btn-info">
+                                                        导出
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div><!-- /.span -->
+                            </div><!-- /.row -->
+
+
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.page-content-area -->
+            </div><!-- /.page-content -->
+        </div><!-- /.main-content -->
+
+        <div class="footer">
+            <div class="footer-inner">
+                <!-- #section:basics/footer -->
+                <div class="footer-content">
+						<span class="bigger-120">
+							电子邮箱：xu852340147@163.com  技术支持：生产实习计科1708第13组项目组<br>西安邮电大学版权所有  Copyright &copy; 2021 XUPT, All Rights.
+						</span>
+                </div>
+
+                <!-- /section:basics/footer -->
+            </div>
+        </div>
+
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+        </a>
+    </div><!-- /.main-container -->
+
+    <!-- basic scripts -->
+
+    <!--[if !IE]> -->
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='assets/js/jquery.min.js'>" + "<" + "/script>");
+    </script>
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='assets/js/jquery1x.min.js'>" + "<" + "/script>");
+    </script>
+    <![endif]-->
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <script src="assets/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/jquery.dataTables.bootstrap.js"></script>
+
+    <!-- ace scripts -->
+    <script src="assets/js/ace-elements.min.js"></script>
+    <script src="assets/js/ace.min.js"></script>
+
+</div>
+</body>
+</html>
+
+<script src="js/vue.js"></script>
+<script src="js/axios.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            userName: "",
+            recordList: []
+        },
+        methods: {
+            logout() {
+                localStorage.clear();
+                location.href = "login.html";
+            }
+        },
+        created() {
+            // 页面渲染前加载数据
+            var uid = localStorage.getItem("uid");
+            var _this = this;
+            axios.get("http://localhost/user/getRecords?uid=" + uid).then(function (response) {
+                var respData = response.data;
+                if (!respData.success) {
+                    alert(respData.msg);
+                } else {
+                    var recordVoList = respData.data;
+                    _this.userName = recordVoList[0].userName;
+                    _this.recordList = recordVoList;
+                }
+            });
+        }
+    });
+</script>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.medical_record.dao.UserDao">
+
+    <insert id="saveUser" parameterType="User" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into t_user(account, password, name, sex, age)
+        values (#{account}, #{password}, #{name}, #{sex}, #{age})
+    </insert>
+
+    <select id="findUserByAccount" parameterType="String" resultType="User">
+        select * from t_user where account=#{account}
+    </select>
+
+    <select id="findRecordVoByUid" parameterType="int" resultType="RecordVo">
+        select r.id id, u.name userName, d.name doctorName, room.name roomName, description, state, date
+            from t_record r
+            left JOIN t_user u on (r.uid = u.id)
+            left join t_doctor d on (r.did = d.id)
+            left JOIN t_room room on (d.rid = room.id)
+            where r.uid=#{uid}
+    </select>
+
+    <select id="findUserById" parameterType="int" resultType="User">
+        select * from t_user where id=#{id}
+    </select>
+
+    <update id="updateUser" parameterType="User">
+        update t_user set password=#{password}, name=#{name}, age=#{age}
+        where id=#{id}
+    </update>
+
+    <select id="findUserByName" parameterType="String" resultType="User">
+        select * from t_user where name=#{name}
+    </select>
+
+</mapper>

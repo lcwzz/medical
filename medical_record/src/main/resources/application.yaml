@@ -1,0 +1,24 @@
+server:
+    port: 80
+    servlet:
+        context-path: /
+
+spring:
+    application:
+        name: medicalRecord
+    datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/medical?useSSL=false&serverTimezone=Asia/Shanghai
+        username: root
+        password: 19990821
+
+mybatis:
+    mapper-locations: classpath:com/example/mapper/*.xml
+    type-aliases-package: com.example.medical_record.entity
+
+logging:
+    level:
+        root: info
+        com.example.medical_record.dao: debug
+        com.example.medical_record.controller: debug

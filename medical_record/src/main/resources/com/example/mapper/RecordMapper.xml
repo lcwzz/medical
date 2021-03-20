@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.medical_record.dao.RecordDao">
+
+    <insert id="addRecord" parameterType="Record" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into t_record(uid, did, description, state, date)
+        values (#{uid}, #{did}, #{description}, #{state}, #{date})
+    </insert>
+
+
+</mapper>
