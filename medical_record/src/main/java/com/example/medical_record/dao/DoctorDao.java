@@ -18,4 +18,6 @@ public interface DoctorDao {
     List<DoctorVo> findAll();
 
     void deleteById(Integer id);
+
+    void addDoctor(Doctor doctor);
 }

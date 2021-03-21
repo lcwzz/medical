@@ -36,4 +36,9 @@
     <delete id="deleteById" parameterType="int">
         delete from t_doctor where id=#{id}
     </delete>
+
+    <insert id="addDoctor" parameterType="Doctor">
+        INSERT INTO t_doctor(`account`, `password`, `name`, `sex`, `age`, `rid`)
+        VALUES (#{account}, #{password}, #{name}, #{sex}, #{age}, #{rid});
+    </insert>
 </mapper>

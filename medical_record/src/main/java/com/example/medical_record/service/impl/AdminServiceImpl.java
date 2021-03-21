@@ -3,6 +3,8 @@ package com.example.medical_record.service.impl;
 import com.example.medical_record.dao.AdminDao;
 import com.example.medical_record.dao.DoctorDao;
 import com.example.medical_record.entity.po.Admin;
+import com.example.medical_record.entity.po.Doctor;
+import com.example.medical_record.entity.po.Room;
 import com.example.medical_record.entity.vo.DoctorVo;
 import com.example.medical_record.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,4 +46,16 @@ public class AdminServiceImpl implements AdminService {
     public void deleteDoctor(Integer id) {
         doctorDao.deleteById(id);
     }
+
+    @Override
+    public List<Room> findAllRoom() {
+        return adminDao.findAllRoom();
+    }
+
+    @Override
+    public void addDoctor(Doctor doctor) {
+        doctorDao.addDoctor(doctor);
+    }
+
+
 }

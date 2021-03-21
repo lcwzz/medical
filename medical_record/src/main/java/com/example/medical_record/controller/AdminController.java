@@ -1,6 +1,8 @@
 package com.example.medical_record.controller;
 
 import com.example.medical_record.entity.po.Admin;
+import com.example.medical_record.entity.po.Doctor;
+import com.example.medical_record.entity.po.Room;
 import com.example.medical_record.entity.vo.DoctorVo;
 import com.example.medical_record.service.AdminService;
 import com.example.medical_record.util.ResponseData;
@@ -57,6 +59,33 @@ public class AdminController {
             return responseData;
         } catch (Exception e) {
             responseData.setSuccess(false).setMsg("删除失败，此医生有关联病历！");
+            return responseData;
+        }
+    }
+
+    @GetMapping("/getAllRoom")
+    public ResponseData getAllRoom() {
+        ResponseData responseData = new ResponseData();
+        try {
+            List<Room> roomList = adminService.findAllRoom();
+            responseData.setSuccess(true);
+            responseData.setData(roomList);
+            return responseData;
+        } catch (Exception e) {
+            responseData.setSuccess(false).setMsg(e.getMessage());
+            return responseData;
+        }
+    }
+
+    @PostMapping("/add")
+    public ResponseData addDoctor(@RequestBody Doctor doctor) {
+        ResponseData responseData = new ResponseData();
+        try {
+            adminService.addDoctor(doctor);
+            responseData.setSuccess(true);
+            return responseData;
+        } catch (Exception e) {
+            responseData.setSuccess(false).setMsg(e.getMessage());
             return responseData;
         }
     }

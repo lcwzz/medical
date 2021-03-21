@@ -9,5 +9,8 @@
         select * from t_admin where account=#{account}
     </select>
 
+    <select id="findAllRoom" resultType="Room">
+        select * from t_room
+    </select>
 
 </mapper>
