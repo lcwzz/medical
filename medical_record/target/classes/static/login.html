@@ -39,6 +39,7 @@ $(document).ready(function () {
              <span style="letter-spacing:15px;">角色:</span>
              <label><input type="radio" v-model="role" name="role" value="普通用户" class="xx">&nbsp 普通用户</label>
              <label><input type="radio" v-model="role" name="role" value="医生" class="xx1">&nbsp 医生</label>
+             <label><input type="radio" v-model="role" name="role" value="管理员" class="xx1">&nbsp 管理员</label>
          </div>
         <div class="xieyi">
             <input name="" type="checkbox" value="" checked="checked"/>
@@ -83,8 +84,10 @@ $(document).ready(function () {
                 var url;
                 if (this.role == "普通用户") {
                     url = "http://localhost/user/login"
-                } else {
+                } else if (this.role == "医生") {
                     url = "http://localhost/doctor/login"
+                } else {
+                    url = "http://localhost/admin/login"
                 }
                 _this = this;
                 axios.post(url, this.user).then(function (response) {
@@ -95,9 +98,12 @@ $(document).ready(function () {
                         if (_this.role == "普通用户") {
                             localStorage.setItem("uid", responseData.data);
                             location.href = "user.html";
-                        } else {
+                        } else if (_this.role == "医生") {
                             localStorage.setItem("did", responseData.data);
                             location.href = "doctor.html";
+                        } else {
+                            localStorage.setItem("admin", JSON.stringify(responseData.data));
+                            location.href = "admin.html";
                         }
                     }
                 });
