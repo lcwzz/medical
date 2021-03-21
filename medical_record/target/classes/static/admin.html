@@ -388,9 +388,10 @@
             },
             search() {
                 var newDoctorList = [];
+                var j = 0;
                 for (let i = 0; i < this.doctorListCopy.length; i++) {
                     if (this.doctorListCopy[i].name.includes(this.searchName)) {
-                        newDoctorList[i] = this.doctorListCopy[i];
+                        newDoctorList[j++] = this.doctorListCopy[i];
                     }
                 }
                 this.doctorList = newDoctorList;

@@ -388,9 +388,10 @@
             },
             search() {
                 var newRecordList = [];
+                var j = 0;
                 for (let i = 0; i < this.recordListCopy.length; i++) {
                     if (this.recordListCopy[i].userName.includes(this.searchName)) {
-                        newRecordList[i] = this.recordListCopy[i];
+                        newRecordList[j++] = this.recordListCopy[i];
                     }
                 }
                 this.recordList = newRecordList;
