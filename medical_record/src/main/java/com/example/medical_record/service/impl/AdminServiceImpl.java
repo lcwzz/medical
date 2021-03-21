@@ -1,11 +1,15 @@
 package com.example.medical_record.service.impl;
 
 import com.example.medical_record.dao.AdminDao;
+import com.example.medical_record.dao.DoctorDao;
 import com.example.medical_record.entity.po.Admin;
+import com.example.medical_record.entity.vo.DoctorVo;
 import com.example.medical_record.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -13,6 +17,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private AdminDao adminDao;
+
+    @Autowired
+    private DoctorDao doctorDao;
 
     @Override
     public Admin login(Admin admin) {
@@ -26,5 +33,15 @@ public class AdminServiceImpl implements AdminService {
                 return adminBb;
             }
         }
+    }
+
+    @Override
+    public List<DoctorVo> findAllDoctors() {
+        return doctorDao.findAll();
+    }
+
+    @Override
+    public void deleteDoctor(Integer id) {
+        doctorDao.deleteById(id);
     }
 }

@@ -1,14 +1,14 @@
 package com.example.medical_record.controller;
 
 import com.example.medical_record.entity.po.Admin;
+import com.example.medical_record.entity.vo.DoctorVo;
 import com.example.medical_record.service.AdminService;
 import com.example.medical_record.util.ResponseData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -34,4 +34,30 @@ public class AdminController {
         }
     }
 
+    @GetMapping("/getAllDoctors")
+    public ResponseData getAllDoctors() {
+        ResponseData responseData = new ResponseData();
+        try {
+            List<DoctorVo> doctors = adminService.findAllDoctors();
+            responseData.setSuccess(true);
+            responseData.setData(doctors);
+            return responseData;
+        } catch (Exception e) {
+            responseData.setSuccess(false).setMsg(e.getMessage());
+            return responseData;
+        }
+    }
+
+    @GetMapping("/deleteDoctor")
+    public ResponseData deleteDoctor(@RequestParam("id") Integer id) {
+        ResponseData responseData = new ResponseData();
+        try {
+            adminService.deleteDoctor(id);
+            responseData.setSuccess(true);
+            return responseData;
+        } catch (Exception e) {
+            responseData.setSuccess(false).setMsg("删除失败，此医生有关联病历！");
+            return responseData;
+        }
+    }
 }

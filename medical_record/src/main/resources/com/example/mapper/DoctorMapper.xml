@@ -27,4 +27,13 @@
         update t_doctor set password=#{password}, name=#{name}, age=#{age}
         where id=#{id}
     </update>
+
+    <select id="findAll" resultType="DoctorVo">
+        select d.id id, account, d.name name, sex, age, r.name roomName
+        from t_doctor d left join t_room r on (d.rid=r.id)
+    </select>
+
+    <delete id="deleteById" parameterType="int">
+        delete from t_doctor where id=#{id}
+    </delete>
 </mapper>

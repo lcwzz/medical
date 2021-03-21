@@ -93,7 +93,7 @@
                             <img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo"/>
                             <d class="user-info">
                                 欢迎您<br/>
-                                <div v-text="doctorName"></div>
+                                <div v-text="admin.name"></div>
                             </d>
                             </span>
 
@@ -267,28 +267,28 @@
                                         <tr>
                                             <th>序号</th>
                                             <th>科室</th>
-                                            <th>患者</th>
-                                            <th>医嘱</th>
-                                            <th>状态</th>
-                                            <th>日期</th>
+                                            <th>账号</th>
+                                            <th>姓名</th>
+                                            <th>性别</th>
+                                            <th>年龄</th>
                                             <th>操作</th>
                                         </tr>
                                         </thead>
 
                                         <tbody>
-                                        <tr v-for="(record, index) in recordList">
+                                        <tr v-for="(doctor, index) in doctorList">
                                             <td v-text="index + 1"></td>
-                                            <td v-text="record.roomName"></td>
-                                            <td v-text="record.userName"></td>
-                                            <td v-text="record.description"></td>
-                                            <td v-text="record.state"></td>
-                                            <td v-text="record.date"></td>
+                                            <td v-text="doctor.roomName"></td>
+                                            <td v-text="doctor.account"></td>
+                                            <td v-text="doctor.name"></td>
+                                            <td v-text="doctor.sex == 0 ? '男' : '女'"></td>
+                                            <td v-text="doctor.age"></td>
                                             <td>
                                                 <div class="hidden-sm hidden-xs btn-group">
-                                                    <button class="btn btn-xs btn-info" @click="update(record)">
+                                                    <button class="btn btn-xs btn-info" @click="update(doctor)">
                                                         <i class="ace-icon fa fa-pencil bigger-120"></i>
                                                     </button>
-                                                    <button class="btn btn-xs btn-danger" @click="del(record.id)">
+                                                    <button class="btn btn-xs btn-danger" @click="del(doctor.id)">
                                                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                                     </button>
                                                 </div>
@@ -360,9 +360,9 @@
     var app = new Vue({
         el: "#app",
         data: {
-            doctorName: "",
-            recordList: [],
-            recordListCopy: [],
+            doctorList: [],
+            doctorListCopy: [],
+            admin: {},
             searchName: ""
         },
         methods: {
@@ -372,43 +372,42 @@
             },
             del(id) {
                 if (confirm("确认删除当前记录吗？")) {
-                    axios.get("http://localhost/record/delete?id="+id).then(function (response) {
+                    axios.get("http://localhost/admin/deleteDoctor?id="+id).then(function (response) {
                         var responseData = response.data;
                         if (responseData.success) {
-                            location.href = "doctor.html";
+                            location.href = "admin.html";
                         } else {
                             alert(responseData.msg);
                         }
                     });
                 }
             },
-            update(record) {
-                localStorage.setItem("record", JSON.stringify(record));
-                location.href = "updateRecord.html";
+            update(doctor) {
+                localStorage.setItem("doctor", JSON.stringify(doctor));
+                location.href = "updateDoctor.html";
             },
             search() {
-                var newRecordList = [];
-                for (let i = 0; i < this.recordListCopy.length; i++) {
-                    if (this.recordListCopy[i].userName.includes(this.searchName)) {
-                        newRecordList[i] = this.recordListCopy[i];
+                var newDoctorList = [];
+                for (let i = 0; i < this.doctorListCopy.length; i++) {
+                    if (this.doctorListCopy[i].name.includes(this.searchName)) {
+                        newDoctorList[i] = this.doctorListCopy[i];
                     }
                 }
-                this.recordList = newRecordList;
+                this.doctorList = newDoctorList;
             }
         },
         created() {
             // 页面渲染前加载数据
             var admin = JSON.parse(localStorage.getItem("admin"));
+            this.admin = admin;
             var _this = this;
-            axios.get("http://localhost/doctor/getRecords?did=" + did).then(function (response) {
+            axios.get("http://localhost/admin/getAllDoctors").then(function (response) {
                 var respData = response.data;
                 if (!respData.success) {
                     alert(respData.msg);
                 } else {
-                    var recordVoList = respData.data;
-                    _this.doctorName = recordVoList[0].doctorName;
-                    _this.recordList = recordVoList;
-                    _this.recordListCopy = recordVoList;
+                    _this.doctorList = respData.data;
+                    _this.doctorListCopy = respData.data;
                 }
             });
         }
