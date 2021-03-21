@@ -285,7 +285,7 @@
                                             <td v-text="doctor.age"></td>
                                             <td>
                                                 <div class="hidden-sm hidden-xs btn-group">
-                                                    <button class="btn btn-xs btn-info" @click="update(doctor)">
+                                                    <button class="btn btn-xs btn-info" @click="update(doctor.id)">
                                                         <i class="ace-icon fa fa-pencil bigger-120"></i>
                                                     </button>
                                                     <button class="btn btn-xs btn-danger" @click="del(doctor.id)">
@@ -382,8 +382,8 @@
                     });
                 }
             },
-            update(doctor) {
-                localStorage.setItem("doctor", JSON.stringify(doctor));
+            update(doctorId) {
+                localStorage.setItem("doctorId", doctorId);
                 location.href = "updateDoctor.html";
             },
             search() {

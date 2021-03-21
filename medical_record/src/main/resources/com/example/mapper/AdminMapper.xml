@@ -13,4 +13,10 @@
         select * from t_room
     </select>
 
+    <update id="updateDoctor" parameterType="Doctor">
+        update t_doctor set account=#{account}, password=#{password}, name=#{name},
+            age=#{age}, sex=#{sex}, rid=#{rid}
+        where id=#{id}
+    </update>
+
 </mapper>

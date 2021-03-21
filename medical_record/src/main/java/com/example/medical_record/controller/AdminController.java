@@ -89,4 +89,17 @@ public class AdminController {
             return responseData;
         }
     }
+
+    @PostMapping("/updateDoctor")
+    public ResponseData updateDoctor(@RequestBody Doctor doctor) {
+        ResponseData responseData = new ResponseData();
+        try {
+            adminService.updateDoctor(doctor);
+            responseData.setSuccess(true);
+            return responseData;
+        } catch (Exception e) {
+            responseData.setSuccess(false).setMsg(e.getMessage());
+            return responseData;
+        }
+    }
 }

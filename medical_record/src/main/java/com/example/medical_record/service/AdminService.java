@@ -17,4 +17,6 @@ public interface AdminService {
     List<Room> findAllRoom();
 
     void addDoctor(Doctor doctor);
+
+    void updateDoctor(Doctor doctor);
 }
