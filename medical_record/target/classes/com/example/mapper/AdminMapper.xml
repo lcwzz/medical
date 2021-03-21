@@ -19,4 +19,9 @@
         where id=#{id}
     </update>
 
+    <update id="updateAdmin" parameterType="admin">
+        update t_admin set password=#{password}, name=#{name}, age=#{age}
+        where id=#{id}
+    </update>
+
 </mapper>

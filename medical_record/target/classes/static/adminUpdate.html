@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <title>海天电子病历管理系统（EMR）</title>
+    <meta name="description" content="Restyling jQuery UI Widgets and Elements"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-fonts.css"/>
+    <link rel="stylesheet" href="assets/css/ace.min.css" id="main-ace-style"/>
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="assets/css/ace-part2.min.css"/>
+    <![endif]-->
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
+    <![endif]-->
+    <script src="assets/js/ace-extra.min.js"></script>
+    <!--[if lte IE 8]>
+    <script src="assets/js/html5shiv.min.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="no-skin">
+<div id="app">
+<!-- #section:basics/navbar.layout -->
+    <div id="navbar" class="navbar navbar-default">
+
+        <div class="navbar-container" id="navbar-container">
+            <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="navbar-header pull-left">
+                <!-- #section:basics/navbar.layout.brand -->
+                <a href="#" class="navbar-brand">
+                    海天病历管理系统
+                </a>
+            </div>
+
+            <!-- #section:basics/navbar.dropdown -->
+            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+
+
+                    <!-- #section:basics/navbar.user_menu -->
+                    <li class="light-blue">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            <img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo"/>
+                            <d class="user-info">
+                                欢迎您<br/>
+                                <div v-text="admin.name"></div>
+                            </d>
+                            </span>
+
+                            <i class="ace-icon fa fa-caret-down"></i>
+                        </a>
+
+                        <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+
+
+                            <li>
+                                <a href="adminInfo.html">
+                                    <i class="ace-icon fa fa-user"></i>
+                                    个人信息设置
+                                </a>
+                            </li>
+
+                            <li class="divider"></li>
+
+                            <li>
+                                <a href="#" @click="logout">
+                                    <i class="ace-icon fa fa-power-off"></i>
+                                    登出
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- /section:basics/navbar.user_menu -->
+                </ul>
+            </div>
+
+            <!-- /section:basics/navbar.dropdown -->
+        </div><!-- /.navbar-container -->
+    </div>
+
+<!-- /section:basics/navbar.layout -->
+<div class="main-container" id="main-container">
+
+    <!-- #section:basics/sidebar -->
+    <div id="sidebar" class="sidebar responsive">
+
+        <ul class="nav nav-list">
+            <li class="active">
+                <a href="#">
+                    <i class="menu-icon fa fa-tachometer"></i>
+                    <span class="menu-text"> 电子管理系统 </span>
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
+
+            <li class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-list"></i>
+                    <span class="menu-text"> 医生管理 </span>
+
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+
+                    <li class="">
+                        <a href="admin.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            医生查看
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="addDoctor.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            医生添加
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="active open">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-tag"></i>
+                    <span class="menu-text"> 更多页面 </span>
+
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+                    <li class="">
+                        <a href="adminInfo.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            用户信息
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="active">
+                        <a href="adminUpdate.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            修改个人信息
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="#" @click="logout">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            注销
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                </ul>
+            </li>
+
+
+        </ul><!-- /.nav-list -->
+
+
+        <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+            <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left"
+               data-icon2="ace-icon fa fa-angle-double-right"></i>
+        </div>
+
+    </div>
+
+    <!-- /section:basics/sidebar -->
+    <div class="main-content">
+        <!-- #section:basics/content.breadcrumbs -->
+        <div class="breadcrumbs" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="javascript:void(0)">病历管理系统</a>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0)">修改个人信息</a>
+                </li>
+            </ul><!-- /.breadcrumb -->
+
+
+        </div>
+
+        <!-- /section:basics/content.breadcrumbs -->
+        <div class="page-content">
+
+            <div class="page-content-area">
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+                        <form class="form-horizontal" role="form">
+                            <!-- #section:elements.form -->
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right">
+                                    姓名：</label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="col-xs-10 col-sm-5" v-model="admin.name"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right">
+                                    账号：</label>
+                                <div class="col-sm-9">
+                                    <div id="form-input-readonly" class="col-xs-10 col-sm-5" v-text="admin.account"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right">
+                                    密码：</label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="col-xs-10 col-sm-5" v-model="admin.password"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right">性别： </label>
+
+                                <div class="radio">
+                                    <label>
+                                        <span v-if="admin.sex == 0">男</span>
+                                        <span v-else>女</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="space-4"></div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" >
+                                    年龄：</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="form-field-age" class="col-xs-10 col-sm-5" v-model="admin.age"/>
+                                </div>
+                            </div>
+                            <div class="space-4"></div>
+
+                            <div class="clearfix form-actions">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button class="btn btn-info" type="button"  @click="update">
+                                        <i class="ace-icon fa fa-check bigger-110"></i>
+                                        立即提交
+                                    </button>
+
+                                    <button class="btn" type="button" @click="reset">
+                                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                                        重置
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="hr hr-24"></div>
+                        </form>
+
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content-area -->
+        </div><!-- /.page-content -->
+    </div><!-- /.main-content -->
+
+    <div class="footer">
+        <div class="footer-inner">
+            <!-- #section:basics/footer -->
+            <div class="footer-content">
+						<span class="bigger-120">
+							电子邮箱：xu852340147@163.com  技术支持：生产实习计科1708第13组项目组<br>西安邮电大学版权所有  Copyright &copy; 2021 XUPT, All Rights.
+						</span>
+            </div>
+
+            <!-- /section:basics/footer -->
+        </div>
+    </div>
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+    </a>
+</div><!-- /.main-container -->
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/js/jquery.min.js'>" + "<" + "/script>");
+</script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/js/jquery1x.min.js'>" + "<" + "/script>");
+</script>
+<![endif]-->
+<script type="text/javascript">
+    if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+</script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+<!-- page specific plugin scripts -->
+
+<!-- ace scripts -->
+<script src="assets/js/ace-elements.min.js"></script>
+<script src="assets/js/ace.min.js"></script>
+</div>
+</body>
+</html>
+
+<script src="js/vue.js"></script>
+<script src="js/axios.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            admin: {},
+        },
+        methods: {
+            logout() {
+                localStorage.clear();
+                location.href = "login.html";
+            },
+            reset() {
+                this.admin = {};
+            },
+            update() {
+                var _this = this;
+                axios.post("http://localhost/admin/updateInfo", this.admin).then(function (response) {
+                    let responseData = response.data;
+                    if (responseData.success) {
+                        location.href = "adminInfo.html";
+                        localStorage.setItem("admin", JSON.stringify(_this.admin));
+                    } else {
+                        alert(responseData.msg);
+                    }
+                });
+            }
+        },
+        created() {
+            // 页面渲染前加载数据
+            // 页面渲染前加载数据
+            var admin = JSON.parse(localStorage.getItem("admin"));
+            this.admin = admin;
+        }
+    });
+</script>

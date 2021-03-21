@@ -62,4 +62,9 @@ public class AdminServiceImpl implements AdminService {
         adminDao.updateDoctor(doctor);
     }
 
+    @Override
+    public void updateAdmin(Admin admin) {
+        adminDao.updateAdmin(admin);
+    }
+
 }

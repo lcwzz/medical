@@ -19,4 +19,6 @@ public interface AdminService {
     void addDoctor(Doctor doctor);
 
     void updateDoctor(Doctor doctor);
+
+    void updateAdmin(Admin admin);
 }

@@ -13,4 +13,6 @@ public interface AdminDao {
     List<Room> findAllRoom();
 
     void updateDoctor(Doctor doctor);
+
+    void updateAdmin(Admin admin);
 }

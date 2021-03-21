@@ -102,4 +102,17 @@ public class AdminController {
             return responseData;
         }
     }
+
+    @PostMapping("/updateInfo")
+    public ResponseData updateInfo(@RequestBody Admin admin) {
+        ResponseData responseData = new ResponseData();
+        try {
+            adminService.updateAdmin(admin);
+            responseData.setSuccess(true);
+            return responseData;
+        } catch (Exception e) {
+            responseData.setSuccess(false).setMsg(e.getMessage());
+            return responseData;
+        }
+    }
 }
